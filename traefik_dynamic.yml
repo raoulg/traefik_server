@@ -1,0 +1,18 @@
+http:
+  routers:
+    dashboard:
+      # Route to the internal Traefik API service
+      service: api@internal
+      # This rule will match any request to the dashboard
+      rule: "PathPrefix(`/api`) || PathPrefix(`/dashboard`)"
+      middlewares:
+        - auth
+      # This prevents it from being exposed on port 80
+      entryPoints:
+        - traefik
+
+  middlewares:
+    auth:
+      basicAuth:
+        users:
+          - "admin:$apr1$Tvr8xvx/$HI5J2X6gtySH6AptCtkj5/"

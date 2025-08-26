@@ -1,0 +1,14 @@
+services:
+  ldviewer:
+    image: ghcr.io/bramvx/ldviewer:dev
+    container_name: ldviewer-demo
+    restart: unless-stopped
+    networks:
+      - traefik-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ldviewer.rule=PathPrefix(`/ldviewer`)"
+      - "traefik.http.routers.ldviewer.entrypoints=web"
+      - "traefik.http.middlewares.ldviewer-stripprefix.stripprefix.prefixes=/ldviewer"
+      - "traefik.http.routers.ldviewer.middlewares=ldviewer-stripprefix"
+      - "traefik.http.services.ldviewer.loadbalancer.server.port=80"
