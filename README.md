@@ -1,5 +1,5 @@
-# rights
-We will use the standard /srv folder for shared data
+# setup rights
+We will use the standard /srv folder on the server for shared data. We will first need to add rights for the users.
 
 ## list groups and owners
 ```bash
@@ -20,8 +20,8 @@ sudo chgrp collaborators /srv/shared
 sudo chmod g+rws,o-w /srv/shared
 sudo usermod -aG collaborators another_user
 ```
-This creates the group collaborators and give them rights to the srv/shared folder
-chmod gives the proper rights to the shared folder 
+This creates the group collaborators, creates the /shared forlder and give the group rights to the srv/shared folder
+chmod gives the proper rights to the shared folder, usermod adds a specific user to the group. 
 - g+rws: Gives the group read, write, and execute (setgid) permissions.
 - o-w: Removes write permission for others (everyone else) for security.
 
@@ -29,10 +29,11 @@ The last command adds `another_user` to the group, in addition to the current us
 
 # installation
 ## install docker
+
 ```bash
 curl -sSL https://raw.githubusercontent.com/raoulg/serverinstall/refs/heads/master/install-docker.sh | bash
 ```
-This is a script that will properly install docker and dockercompose on the server
+This is a script that will properly install `docker` and `docker compose` on the server
 
 # kick off traefik 
 
